@@ -87,6 +87,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Traveling to Greece during Covid-19: What you need to know before you go',
+    date: 'Feb 11th, 2022',
+    firstParagraph: 'Greece is still open to some vaccinated or certified Covid-free tourists without the need for quarantine, but restrictions have tightened to try to keep the Omicron variant in check.',
+    secondParagraph: "Ancient monuments, myriad islands, spectacular beaches and vast mountains. Greece attracts millions of visitors each year looking for a sunny seaside escape, or a history-focused trip exploring its long and storied past. Its popular resorts are perfect for partying during the summer, but there's plenty of space to get away from the crowds, and outside of summer season you'll often find yourself the only tourist around.",
+    thirdParagraph: "As of early February 2022, Greece was in the process of updating its entry requirements and has not published a full list of countries from which travelers are permitted to arrive in Greece. Nevertheless, many are now allowed entry without quarantine or proof of a negative Covid test, in line with European Union policies. Nationals of countries not mentioned below are advised to contact their nearest Greek embassy or consulate before travel, or follow their own government guidelines."
   }
 ];
 
@@ -115,3 +122,45 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const articleMaker = articleObj => {
+  // Create elements
+  const articleDiv = document.createElement("div");
+  const articleTitle = document.createElement("h2");
+  const articleDate = document.createElement("p");
+  const parOne = document.createElement("p");
+  const parTwo = document.createElement("p");
+  const parThree = document.createElement("p");
+  const expandBtn = document.createElement("span");
+
+  // Add classes & text content
+  articleDiv.classList.add("article");
+  articleTitle.textContent = articleObj.title;
+  articleDate.classList.add("date");
+  articleDate.textContent = articleObj.date;
+  parOne.textContent = articleObj.firstParagraph;
+  parTwo.textContent = articleObj.secondParagraph;
+  parThree.textContent = articleObj.thirdParagraph;
+  expandBtn.classList.add("expandButton");
+  expandBtn.textContent = "+";
+
+  // Create structure
+  articleDiv.appendChild(articleTitle);
+  articleDiv.appendChild(articleDate);
+  articleDiv.appendChild(parOne);
+  articleDiv.appendChild(parTwo);
+  articleDiv.appendChild(parThree);
+  articleDiv.appendChild(expandBtn);
+
+  // Add event listeners
+  expandBtn.addEventListener("click", evt => {
+    articleDiv.classList.toggle("article-open");
+  })
+
+  return articleDiv;
+}
+
+data.forEach(article => {
+  const newArticle = articleMaker(article);
+  document.querySelector("div.articles").appendChild(newArticle);
+})
